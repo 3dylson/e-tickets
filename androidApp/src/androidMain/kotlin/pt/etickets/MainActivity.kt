@@ -1,4 +1,4 @@
-package com.myapplication
+package pt.etickets
 
 import MainView
 import android.os.Bundle
