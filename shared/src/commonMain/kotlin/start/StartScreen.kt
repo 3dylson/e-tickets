@@ -1,5 +1,6 @@
 package start
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
@@ -22,17 +23,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dev.icerock.moko.resources.StringResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import pt.etickets.SharedRes
-import ui.util.Strings
-import ui.util.presentation.stringResource
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun StartFragment() {
-    Column(
+    Surface(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(
@@ -41,63 +38,70 @@ fun StartFragment() {
                 reverseScrolling = false,
                 flingBehavior = null,
             )
-
     ) {
-        Surface(
-            modifier = Modifier.padding(16.dp),
-            shape = RoundedCornerShape(ZeroCornerSize),
-            tonalElevation = 0.dp,
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
         ) {
-            Image(
-                painter = painterResource("compose-multiplatform.xml"),
-                contentDescription = null,
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier
-                    .height(300.dp)
-                    .fillMaxWidth()
-            )
-        }
+            Surface(
+                shape = RoundedCornerShape(ZeroCornerSize),
+                tonalElevation = 0.dp,
+            ) {
+                Image(
+                    painter = painterResource("compose-multiplatform.xml"),
+                    contentDescription = "background image",
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .height(300.dp)
+                        .fillMaxWidth()
+                )
+            }
 
-        Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
-        Text(
-            text = stringResource(id = SharedRes.strings.app_name),
-            style = MaterialTheme.typography.displaySmall,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(
-            text = "TODO",
-            style = MaterialTheme.typography.bodySmall,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer(modifier = Modifier.height(32.dp))
-
-        Button(
-            onClick = { /* Handle Login Button Click */ },
-            modifier = Modifier.fillMaxWidth()
-        ) {
             Text(
-                text = "Login",
+                text = "e-tickets",
+                style = MaterialTheme.typography.displaySmall,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
             )
-        }
 
-        Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Button(
-            onClick = { /* Handle Register Button Click */ },
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.outlinedButtonColors(
-                contentColor = MaterialTheme.colorScheme.primary,
-            )
-        ) {
             Text(
-                text = "Register",
+                text = "",
+                style = MaterialTheme.typography.bodySmall,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
+
+            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.weight(1f))
+
+            Button(
+                onClick = { /* Handle Login Button Click */ },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "Login",
+                    color = MaterialTheme.colorScheme.onPrimary,
+                )
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Button(
+                onClick = { /* Handle Register Button Click */ },
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.outlinedButtonColors(),
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.primaryContainer),
+            ) {
+                Text(
+                    text = "Nova conta",
+                )
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }

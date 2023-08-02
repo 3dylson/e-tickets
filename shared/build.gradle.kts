@@ -9,7 +9,6 @@ plugins {
 
 kotlin {
     androidTarget()
-
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -26,7 +25,8 @@ kotlin {
             export("dev.icerock.moko:resources:0.23.0")
             export("dev.icerock.moko:graphics:0.9.0") // toUIColor here
         }
-        extraSpecAttributes["resources"] = "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
+        extraSpecAttributes["resources"] =
+            "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
     }
 
     sourceSets {
@@ -37,6 +37,8 @@ kotlin {
                 implementation(compose.material3)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
+                api(compose.foundation)
+                api(compose.animation)
 
                 implementation("media.kamel:kamel-image:0.7.1")
 
@@ -53,6 +55,10 @@ kotlin {
 
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
 
+                api("moe.tlaster:precompose:1.5.0-beta01")
+                // api("moe.tlaster:precompose-molecule:$precompose_version") // For Molecule intergration
+                // api("moe.tlaster:precompose-viewmodel:$precompose_version") // For ViewModel intergration
+
             }
         }
         val androidMain by getting {
@@ -68,7 +74,7 @@ kotlin {
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
 
-        //TODO delete after fix
+        //TODO delete after fix https://github.com/icerockdev/moko-resources/issues/510#issuecomment-1619141070
         iosX64Main.resources.srcDirs("build/generated/moko/iosX64Main/src")
         iosArm64Main.resources.srcDirs("build/generated/moko/iosArm64Main/src")
         iosSimulatorArm64Main.resources.srcDirs("build/generated/moko/iosSimulatorArm64Main/src")
@@ -95,7 +101,7 @@ android {
     sourceSets["main"].res.srcDirs("src/androidMain/res")
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
-    //TODO delete after fix
+    //TODO delete after fix https://github.com/icerockdev/moko-resources/issues/510#issuecomment-1619141070
     sourceSets["main"].java.srcDirs("build/generated/moko/androidMain/src")
 
     defaultConfig {
