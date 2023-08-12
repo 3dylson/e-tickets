@@ -1,14 +1,15 @@
-package start
+package ui.presentation.start
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.foundation.verticalScroll
@@ -28,15 +29,15 @@ import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-fun StartFragment() {
+fun StartScreen(
+    onLoginClick: () -> Unit,
+    onRegisterClick: () -> Unit,
+) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(
-                enabled = true,
-                state = ScrollState(0),
-                reverseScrolling = false,
-                flingBehavior = null,
+                rememberScrollState()
             )
     ) {
         Column(
@@ -61,7 +62,7 @@ fun StartFragment() {
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "e-tickets",
+                text = "e-tickets", //stringResource(SharedRes.strings.app_name),
                 style = MaterialTheme.typography.displaySmall,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
@@ -79,8 +80,9 @@ fun StartFragment() {
             Spacer(modifier = Modifier.weight(1f))
 
             Button(
-                onClick = { /* Handle Login Button Click */ },
-                modifier = Modifier.fillMaxWidth()
+                onClick = { onLoginClick() },
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(vertical = 16.dp),
             ) {
                 Text(
                     text = "Login",
@@ -88,13 +90,14 @@ fun StartFragment() {
                 )
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             Button(
-                onClick = { /* Handle Register Button Click */ },
+                onClick = { onRegisterClick() },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.outlinedButtonColors(),
                 border = BorderStroke(1.dp, MaterialTheme.colorScheme.primaryContainer),
+                contentPadding = PaddingValues(vertical = 16.dp),
             ) {
                 Text(
                     text = "Nova conta",
@@ -105,3 +108,15 @@ fun StartFragment() {
         }
     }
 }
+
+/*@Composable
+fun stringResource(id: StringResource, vararg args: Any): String {
+    return when (getPlatform().platformType) {
+        PlatformType.ANDROID -> {
+            ""
+        } //Strings(LocalContext.current).get(id, args.toList())
+        PlatformType.IOS -> {
+            Strings().get(id, args.toList(), null)
+        }
+    }
+}*/

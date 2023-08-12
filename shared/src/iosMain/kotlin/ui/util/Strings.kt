@@ -5,8 +5,8 @@ import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.format
 
-actual class Strings {
-    actual fun get(id: StringResource, args: List<Any>): String {
+actual class Strings actual constructor() {
+    actual fun get(id: StringResource, args: List<Any>, context: Any?): String {
         return if(args.isEmpty()) {
             StringDesc.Resource(id).localized()
         } else {

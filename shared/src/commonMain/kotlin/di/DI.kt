@@ -1,0 +1,6 @@
+package di
+
+object DI {
+
+
+}

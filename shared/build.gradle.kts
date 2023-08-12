@@ -35,6 +35,9 @@ kotlin {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)
+                implementation(compose.ui)
+                implementation(compose.materialIconsExtended)
+                api(compose.ui)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
                 api(compose.foundation)
@@ -58,6 +61,8 @@ kotlin {
                 api("moe.tlaster:precompose:1.5.0-beta01")
                 // api("moe.tlaster:precompose-molecule:$precompose_version") // For Molecule intergration
                 // api("moe.tlaster:precompose-viewmodel:$precompose_version") // For ViewModel intergration
+
+                implementation("org.kodein.di:kodein-di:7.12.0")
 
             }
         }
