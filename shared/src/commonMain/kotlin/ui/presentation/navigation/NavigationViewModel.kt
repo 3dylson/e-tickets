@@ -15,9 +15,6 @@ class NavigationViewModel : ViewModel() {
         when (event) {
             is NavigationEvent.Login -> updateStateOnLogin()
             is NavigationEvent.Logout -> updateStateOnLogout()
-            is NavigationEvent.BottomBarVisibilityChanged -> updateStateOnBottomBarVisibilityChanged(
-                event.isVisible
-            )
         }
     }
 
@@ -27,9 +24,5 @@ class NavigationViewModel : ViewModel() {
 
     private fun updateStateOnLogout() {
         _state.update { it.copy(isUserLoggedIn = false) }
-    }
-
-    private fun updateStateOnBottomBarVisibilityChanged(isVisible: Boolean) {
-        _state.update { it.copy(showBottomBar = isVisible) }
     }
 }
