@@ -1,5 +1,5 @@
 package ui.presentation.navigation
 
 data class NavigationState(
-    val isUserLoggedIn: Boolean = false,
+    val isUserLoggedIn: Boolean = true,
 )

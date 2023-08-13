@@ -1,6 +1,7 @@
 package ui.presentation.navigation
 
-sealed interface NavigationEvent {
-    object Login : NavigationEvent
-    object Logout : NavigationEvent
+sealed class NavigationEvent {
+    data object Login : NavigationEvent()
+    data object Logout : NavigationEvent()
+
 }

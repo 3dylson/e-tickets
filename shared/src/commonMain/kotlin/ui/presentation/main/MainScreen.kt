@@ -16,26 +16,34 @@ import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.rememberNavigator
 import ui.presentation.navigation.NavigationEvent
 import ui.presentation.navigation.NavigationState
-import kotlin.reflect.KFunction1
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
     state: NavigationState,
-    onEvent: KFunction1<NavigationEvent, Unit>,
+    onEvent: (NavigationEvent) -> Unit,
+    appNavigator: Navigator,
 ) {
-    val navigator = rememberNavigator()
+    val mainNavigator = rememberNavigator()
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        bottomBar = { BottomBar(navigator = navigator) },
+        bottomBar = { bottomBar(mainNavigator) },
     ) { innerPadding ->
         innerPadding
         MainNavigation(
-            navigator = navigator,
+            mainNavigator = mainNavigator,
+            appNavigator = appNavigator,
             state = state,
             onEvent = onEvent
         )
     }
+}
+
+@Composable
+private fun bottomBar(
+    navigator: Navigator,
+) {
+    BottomBar(navigator = navigator)
 }
 
 @Composable
