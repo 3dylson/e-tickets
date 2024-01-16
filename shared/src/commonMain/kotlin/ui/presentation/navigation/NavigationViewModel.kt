@@ -15,7 +15,12 @@ class NavigationViewModel : ViewModel() {
         when (event) {
             is NavigationEvent.Login -> updateStateOnLogin()
             is NavigationEvent.Logout -> updateStateOnLogout()
+            is NavigationEvent.BuyTicketClicked -> updateStateTicketEvent(event)
         }
+    }
+
+    private fun updateStateTicketEvent(event: NavigationEvent.BuyTicketClicked) {
+        _state.update { it.copy(eventOnDetail = event.event, ticketCount = event.ticketCount) }
     }
 
     private fun updateStateOnLogin() {

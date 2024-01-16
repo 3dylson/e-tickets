@@ -1,7 +1,6 @@
-package ui.presentation.main.feed.event
+package ui.presentation.main.feed.event.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,7 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
@@ -52,6 +53,7 @@ fun EventDetailsScreen(
     navigator: Navigator,
     state: NavigationState,
     onEvent: (NavigationEvent) -> Unit,
+    onBuyClick: (event: Event, ticketCount: Int) -> Unit,
 ) {
     val eventDetails = getEventDetailsById(id) // Replace with actual data retrieval
 
@@ -74,6 +76,7 @@ fun EventDetailsScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
                 .padding(16.dp)
+                .verticalScroll(rememberScrollState())
         ) {
             // Event image
             Image(
@@ -82,7 +85,6 @@ fun EventDetailsScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(shape = RoundedCornerShape(8.dp))
-                    .background(MaterialTheme.colorScheme.primary)
                     .height(240.dp),
                 contentScale = ContentScale.Crop
             )
@@ -116,6 +118,19 @@ fun EventDetailsScreen(
                         text = eventDetails.description,
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(top = 8.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Price information and ticket type selection
+                    Text(
+                        text = "Preço:",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                    Text(
+                        text = "€" + eventDetails.ticketPrice.toString(),
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.padding(top = 4.dp)
                     )
                 }
             }
@@ -162,17 +177,17 @@ fun EventDetailsScreen(
                 }
             }
 
+            Spacer(modifier = Modifier.height(16.dp))
             Spacer(modifier = Modifier.weight(1f))
 
-            // Buy ticket button
             Button(
-                onClick = { /* Handle buy ticket click */ },
+                onClick = { onBuyClick.invoke(eventDetails, ticketQuantity) },
                 contentPadding = PaddingValues(vertical = 16.dp),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 16.dp)
             ) {
-                Text(text = "Comprar Ticket")
+                Text(text = "Continuar")
             }
 
             Spacer(modifier = Modifier.height(16.dp))

@@ -42,7 +42,11 @@ import ui.presentation.components.GoogleSignInButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(onCloseClick: () -> Unit, onLoginClick: () -> Unit, onForgotPasswordClick: () -> Unit) {
+fun LoginScreen(
+    onCloseClick: () -> Unit,
+    onLoginClick: () -> Unit,
+    onForgotPasswordClick: () -> Unit,
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = { LoginScreenTopBar(onCloseClick) },
@@ -73,7 +77,7 @@ private fun LoginScreenTopBar(onCloseClick: () -> Unit) {
 private fun LoginScreenContent(
     innerPadding: PaddingValues,
     onLoginClick: () -> Unit,
-    onForgotPasswordClick: () -> Unit
+    onForgotPasswordClick: () -> Unit,
 ) {
     Box(
         modifier = Modifier.fillMaxSize().padding(innerPadding),
@@ -86,7 +90,7 @@ private fun LoginScreenContent(
             Text(
                 text = "Bem vindo de volta!",
                 style = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier.padding(top = 32.dp, bottom = 8.dp)
+                modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
                     .align(Alignment.Start)
             )
 
@@ -162,6 +166,7 @@ private fun LoginScreenContent(
             GoogleSignInButton({/*TODO*/ })
 
             Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.weight(1f))
 
             /*Button(
                 onClick = {},
@@ -176,6 +181,8 @@ private fun LoginScreenContent(
                 btnText = "Cadastre-se",
                 onClick = {},
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }

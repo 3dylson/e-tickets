@@ -1,5 +1,9 @@
 package ui.presentation.main.feed.event.model
 
+import kotlinx.serialization.Serializable
+
+
+@Serializable
 data class Event(
     val eventId: String = "0",
     val eventName: String,
@@ -10,4 +14,5 @@ data class Event(
     val description: String,
     val imageUrl: String,
     val djs: List<String> = emptyList(),
+    val ticketPrice: Double,
 )

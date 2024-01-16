@@ -158,6 +158,7 @@ fun createMockEventFeedItems(count: Int = 5): List<Event> {
         imageUrl = "https://example.com/image.jpg",
         description = "This is a sample event description.",
         organizer = "Mock Organizer",
+        ticketPrice = 25.0,
     )
     return List(count) { mockEvent }
 }

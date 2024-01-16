@@ -8,9 +8,12 @@ import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.RouteBuilder
 import moe.tlaster.precompose.navigation.path
 import moe.tlaster.precompose.navigation.transition.NavTransition
-import ui.presentation.main.feed.event.EventDetailsScreen
+import ui.presentation.main.feed.event.EventDetailsDestination
+import ui.presentation.main.feed.event.screens.EventDetailsScreen
+import ui.presentation.main.feed.event.eventDetailsGraph
 import ui.presentation.navigation.NavigationEvent
 import ui.presentation.navigation.NavigationState
+import ui.util.serializeObjectToJsonAndUrlEncode
 
 sealed class FeedDestination(val route: String) {
     data object EventDetails : FeedDestination("/event/{id:[0-9]+}") {
@@ -23,6 +26,7 @@ fun RouteBuilder.feedGraph(
     state: NavigationState,
     onEvent: (NavigationEvent) -> Unit,
 ) {
+
     scene(
         FeedDestination.EventDetails.route, navTransition =
         NavTransition(
@@ -34,14 +38,26 @@ fun RouteBuilder.feedGraph(
         )
     ) { backStackEntry ->
         val id: String? = backStackEntry.path<String>("id")
-        id?.let {
+        id?.let { id ->
             EventDetailsScreen(
-                id = it,
+                id = id,
                 navigator = navigator,
                 state = state,
                 onEvent = onEvent,
+                onBuyClick = { event, ticketCount ->
+
+                    val encodedEventData = serializeObjectToJsonAndUrlEncode(event)
+
+                    navigator.navigate(
+                        EventDetailsDestination.PurchaseTicketConfirmation.route(
+                            encodedEventData,
+                            ticketCount
+                        )
+                    )
+                }
             )
 
         }
     }
+    eventDetailsGraph(navigator, state, onEvent)
 }

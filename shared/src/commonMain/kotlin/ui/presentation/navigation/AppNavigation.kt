@@ -18,6 +18,8 @@ fun AppNavigation(
     state: NavigationState,
     onEvent: (NavigationEvent) -> Unit,
 ) {
+
+
     NavHost(
         navigator = navigator,
         initialRoute = startDestination,

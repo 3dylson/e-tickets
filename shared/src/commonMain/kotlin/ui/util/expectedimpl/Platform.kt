@@ -1,4 +1,4 @@
-package ui.util
+package ui.util.expectedimpl
 
 interface Platform {
     val name: String

@@ -1,4 +1,4 @@
-package ui.util
+package ui.util.expectedimpl
 
 import dev.icerock.moko.resources.StringResource
 
